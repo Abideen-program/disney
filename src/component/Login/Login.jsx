@@ -4,7 +4,10 @@ import styled from "styled-components";
 const Login = () => {
   return (
     <Container>
-      <Content>Login</Content>
+      <Content>
+        login
+        <BgImage />
+      </Content>
     </Container>
   );
 };
@@ -30,6 +33,20 @@ const Content = styled.div`
   align-items: center;
   justify-content: center;
   padding: 80px 40px;
+  position: relative;
+`;
+
+const BgImage = styled.div`
+background-image: url('/images/login-background.jpg');
+height: 100%;
+background-position: top;
+background-repeat: no-repeat
+background-size: cover;
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+z-index: -1
 `;
 
 export default Login;
