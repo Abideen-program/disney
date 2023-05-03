@@ -1,8 +1,24 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+
+import { app } from "../../firebase";
+
+const auth = getAuth(app);
+
+const provider = new GoogleAuthProvider();
 
 const Header = () => {
+  const logIn = async () => {
+    await signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user.providerData[0];
+        console.log(user);
+      })
+      .catch((error) => console.log(error.message));
+  };
+
   return (
     <>
       <Nav>
@@ -16,32 +32,32 @@ const Header = () => {
             <span>HOME</span>
           </a>
 
-          <a href="/home">
-            <img src="/images/search-icon.svg" alt="Home" />
+          <a href="/search">
+            <img src="/images/search-icon.svg" alt="SEARCH" />
             <span>SEARCH</span>
           </a>
 
-          <a href="/home">
-            <img src="/images/watchlist-icon.svg" alt="Home" />
+          <a href="/watchlist">
+            <img src="/images/watchlist-icon.svg" alt="WATCHLIST" />
             <span>WATCHLIST</span>
           </a>
 
-          <a href="/home">
-            <img src="/images/original-icon.svg" alt="Home" />
+          <a href="/originals">
+            <img src="/images/original-icon.svg" alt="ORIGINALS" />
             <span>ORIGINALS</span>
           </a>
 
-          <a href="/home">
-            <img src="/images/movie-icon.svg" alt="Home" />
+          <a href="/movies">
+            <img src="/images/movie-icon.svg" alt="MOVIES" />
             <span>MOVIES</span>
           </a>
 
-          <a href="/home">
-            <img src="/images/series-icon.svg" alt="Home" />
+          <a href="/series">
+            <img src="/images/series-icon.svg" alt="SERIES" />
             <span>SERIES</span>
           </a>
         </NAvMenu>
-        <p>Login</p>
+        <LOGIN onClick={logIn}>Login</LOGIN>
       </Nav>
       <Outlet />
     </>
@@ -136,6 +152,23 @@ const NAvMenu = styled.div`
 
   @media (max-width: 768px) {
     display: none;
+  }
+`;
+
+const LOGIN = styled.a`
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid #f9f9f9;
+  letter-spacing: 1.5px;
+  padding: 8px 16px;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition: all 0.2s ease-in 0s;
+
+  &:hover {
+    background: #f9f9f9;
+    color: black;
+    border: transparent;
   }
 `;
 
