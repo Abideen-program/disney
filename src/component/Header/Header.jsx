@@ -13,8 +13,10 @@ const provider = new GoogleAuthProvider();
 
 const Header = () => {
   const user = useSelector((state) => state.user.user);
-  console.log(user);
-  console.log(user.displayName);
+
+  const userImage = user?.photoURL;
+  const userName = user?.displayName;
+  const userEmail = user?.email;
 
   const dispatch = useDispatch();
 
@@ -28,6 +30,8 @@ const Header = () => {
       .catch((error) => console.log(error.message));
   };
 
+  //   const {} = user
+
   return (
     <>
       <Nav>
@@ -35,38 +39,49 @@ const Header = () => {
           <img src="/images/logo.svg" alt="Logo" />
         </Logo>
 
-        <NAvMenu>
-          <a href="/home">
-            <img src="/images/home-icon.svg" alt="Home" />
-            <span>HOME</span>
-          </a>
+        {user ? (
+          <NAvMenu>
+            <a href="/home">
+              <img src="/images/home-icon.svg" alt="Home" />
+              <span>HOME</span>
+            </a>
 
-          <a href="/search">
-            <img src="/images/search-icon.svg" alt="SEARCH" />
-            <span>SEARCH</span>
-          </a>
+            <a href="/search">
+              <img src="/images/search-icon.svg" alt="SEARCH" />
+              <span>SEARCH</span>
+            </a>
 
-          <a href="/watchlist">
-            <img src="/images/watchlist-icon.svg" alt="WATCHLIST" />
-            <span>WATCHLIST</span>
-          </a>
+            <a href="/watchlist">
+              <img src="/images/watchlist-icon.svg" alt="WATCHLIST" />
+              <span>WATCHLIST</span>
+            </a>
 
-          <a href="/originals">
-            <img src="/images/original-icon.svg" alt="ORIGINALS" />
-            <span>ORIGINALS</span>
-          </a>
+            <a href="/originals">
+              <img src="/images/original-icon.svg" alt="ORIGINALS" />
+              <span>ORIGINALS</span>
+            </a>
 
-          <a href="/movies">
-            <img src="/images/movie-icon.svg" alt="MOVIES" />
-            <span>MOVIES</span>
-          </a>
+            <a href="/movies">
+              <img src="/images/movie-icon.svg" alt="MOVIES" />
+              <span>MOVIES</span>
+            </a>
 
-          <a href="/series">
-            <img src="/images/series-icon.svg" alt="SERIES" />
-            <span>SERIES</span>
-          </a>
-        </NAvMenu>
-        <LOGIN onClick={authHandler}>Login</LOGIN>
+            <a href="/series">
+              <img src="/images/series-icon.svg" alt="SERIES" />
+              <span>SERIES</span>
+            </a>
+          </NAvMenu>
+        ) : (
+          ""
+        )}
+
+        {userImage ? (
+          <UserImg>
+            <img src={userImage} alt={userName} />
+          </UserImg>
+        ) : (
+          <LOGIN onClick={authHandler}>Login</LOGIN>
+        )}
       </Nav>
       <Outlet />
     </>
@@ -178,6 +193,17 @@ const LOGIN = styled.a`
     background: #f9f9f9;
     color: black;
     border: transparent;
+  }
+`;
+
+const UserImg = styled.div`
+  max-width: 40px;
+  max-height: 40px;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    border-radius: 100%;
   }
 `;
 
