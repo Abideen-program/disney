@@ -2,19 +2,28 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
 
 import { app } from "../../firebase";
+import { setUser } from "../Store/Features/userSlice";
 
 const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
 
 const Header = () => {
-  const logIn = async () => {
+  const user = useSelector((state) => state.user.user);
+  console.log(user);
+  console.log(user.displayName);
+
+  const dispatch = useDispatch();
+
+  //This function handles login with googgle mail
+  const authHandler = async () => {
     await signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user.providerData[0];
-        console.log(user);
+        dispatch(setUser(user));
       })
       .catch((error) => console.log(error.message));
   };
@@ -57,7 +66,7 @@ const Header = () => {
             <span>SERIES</span>
           </a>
         </NAvMenu>
-        <LOGIN onClick={logIn}>Login</LOGIN>
+        <LOGIN onClick={authHandler}>Login</LOGIN>
       </Nav>
       <Outlet />
     </>
