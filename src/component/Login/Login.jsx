@@ -25,7 +25,6 @@ const Container = styled.section`
   overflow: hidden;
   width: 100%;
   height: 100vh;
-  border: 1px solid blue;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,7 +33,6 @@ const Container = styled.section`
 `;
 
 const Content = styled.div`
-  border: 1px solid red;
   width: 100%;
   height: 100%;
   min-height: 100vh;
