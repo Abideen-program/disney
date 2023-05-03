@@ -13,6 +13,7 @@ const Login = () => {
             with a Disney+ subscription. As of 07/26/23, the price of the
             Disney+ and the Disney bundle with increase by $1.
           </Description>
+          <CTALogoTwo src="/images/cta-logo-two.png" alt="cta-logo" />
         </CTA>
         <BgImage />
       </Content>
@@ -61,7 +62,6 @@ z-index: -1
 const CTA = styled.div`
   max-width: 650px;
   width: 100%;
-  top: 0;
   margin: 0 auto;
   margin-bottom: 10vh;
   display: flex;
@@ -100,6 +100,12 @@ const Description = styled.p`
   line-height: 1.5;
   letter-spacing: 1.6px;
   margin-bottom: 24px;
+`;
+
+const CTALogoTwo = styled.img`
+  display: block;
+  max-width: 600px;
+  width: 100%;
 `;
 
 export default Login;
