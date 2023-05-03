@@ -1,24 +1,33 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 
 import { app } from "../../firebase";
-import { setUser } from "../Store/Features/userSlice";
+import { setUser, setSignOut } from "../Store/Features/userSlice";
 
 const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
 
 const Header = () => {
-  const user = useSelector((state) => state.user.user);
+  const userData = useSelector((state) => state.user.user);
+  const userImage = userData?.photoURL;
+  const userName = userData?.displayName;
+  const userEmail = userData?.email;
 
-  const userImage = user?.photoURL;
-  const userName = user?.displayName;
-  const userEmail = user?.email;
+  const [drop, setDrop] = useState(false);
 
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   //This function handles login with googgle mail
   const authHandler = async () => {
@@ -27,10 +36,29 @@ const Header = () => {
         const user = result.user.providerData[0];
         dispatch(setUser(user));
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => alert(error.message));
   };
 
-  //   const {} = user
+  //this function will handle the signout
+  const signOutHandler = async () => {
+    await signOut(auth)
+      .then(() => {
+        dispatch(setSignOut());
+        setDrop(!drop);
+        navigate("/");
+      })
+      .catch((error) => alert(error.message));
+  };
+
+  //this will observe the authentication state and always redirect to home section if there is a logged in user
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        dispatch(setUser(user.providerData[0]));
+        navigate("/home");
+      }
+    });
+  }, [userName]);
 
   return (
     <>
@@ -39,12 +67,12 @@ const Header = () => {
           <img src="/images/logo.svg" alt="Logo" />
         </Logo>
 
-        {user ? (
+        {userData ? (
           <NAvMenu>
-            <a href="/home">
+            <Link to="/home">
               <img src="/images/home-icon.svg" alt="Home" />
               <span>HOME</span>
-            </a>
+            </Link>
 
             <a href="/search">
               <img src="/images/search-icon.svg" alt="SEARCH" />
@@ -76,9 +104,16 @@ const Header = () => {
         )}
 
         {userImage ? (
-          <UserImg>
-            <img src={userImage} alt={userName} />
-          </UserImg>
+          <SIGNOUT>
+            <UserImg onClick={() => setDrop(!drop)}>
+              <img src={userImage} alt={userName} />
+            </UserImg>
+            {drop && (
+              <DropDown onClick={signOutHandler}>
+                <span>Log out</span>
+              </DropDown>
+            )}
+          </SIGNOUT>
         ) : (
           <LOGIN onClick={authHandler}>Login</LOGIN>
         )}
@@ -207,4 +242,21 @@ const UserImg = styled.div`
   }
 `;
 
+const DropDown = styled.div`
+  position: absolute;
+  top: 48px;
+  right: 0;
+  background: rgb(19, 19, 19);
+  cursor: pointer;
+  width: 100px;
+  letter-spacing: 2px;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid rgba(151, 151, 151, 0.34);
+  border-radius: 4px;
+`;
+
+const SIGNOUT = styled.div`
+  position: relative;
+`;
 export default Header;
