@@ -6,43 +6,41 @@ const Viewers = () => {
   return (
     <Container>
       <Content>
-        <motion.img
-          whileHover={{ scale: 1.3 }}
-          src="/images/viewers-disney.png"
-          alt=""
-        />
+        <img src="/images/viewers-disney.png" alt="" />
+        <video autoPlay={true} muted={true} loop={true} playsInline={true}>
+          <source src="/videos/1564674844-disney.mp4" type="video/mp4" />
+        </video>
       </Content>
 
       <Content>
-        <motion.img
-          whileHover={{ scale: 1.3 }}
-          src="/images/viewers-marvel.png"
-          alt=""
-        />
+        <img src="/images/viewers-marvel.png" alt="" />
+        <video autoPlay={true} muted={true} loop={true} playsInline={true}>
+          <source src="/videos/1564676115-marvel.mp4" type="video/mp4" />
+        </video>
       </Content>
 
       <Content>
-        <motion.img
-          whileHover={{ scale: 1.3 }}
-          src="/images/viewers-national.png"
-          alt=""
-        />
+        <img src="/images/viewers-national.png" alt="" />
+        <video autoPlay muted loop playsInline>
+          <source
+            src="/videos/1564676296-national-geographic.mp4"
+            type="video/mp4"
+          />
+        </video>
       </Content>
 
       <Content>
-        <motion.img
-          whileHover={{ scale: 1.3 }}
-          src="/images/viewers-pixar.png"
-          alt=""
-        />
+        <img src="/images/viewers-pixar.png" alt="" />
+        <video autoPlay muted loop playsInline>
+          <source src="/videos/1564676714-pixar.mp4" type="video/mp4" />
+        </video>
       </Content>
 
       <Content>
-        <motion.img
-          whileHover={{ scale: 1.3 }}
-          src="/images/viewers-starwars.png"
-          alt=""
-        />
+        <img src="/images/viewers-starwars.png" alt="" />
+        <video autoPlay muted loop playsInline>
+          <source src="/videos/1608229455-star-wars.mp4" type="video/mp4" />
+        </video>
       </Content>
     </Container>
   );
@@ -72,6 +70,7 @@ const Content = styled.div`
 
   &:hover {
     border: solid rgba(249, 249, 249, 0.8);
+    transform: scale(1.05);
   }
 
   img {
@@ -82,6 +81,19 @@ const Content = styled.div`
     z-index: 1;
     opacity: 1;
     transition: opacity 1s ease-in-out 0s;
+  }
+
+  video {
+    width: 100%;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: all 1s ease-in-out 0s;
+    z-index: 0;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 `;
 
