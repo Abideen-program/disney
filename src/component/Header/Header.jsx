@@ -137,6 +137,7 @@ const Nav = styled.nav`
   align-items: center;
   padding: 0 36px;
   z-index: 3;
+  border-bottom: 1px solid white;
 `;
 
 const Logo = styled.a`
