@@ -4,6 +4,7 @@ import ImageSlider from "../ImageSlider/ImageSlider";
 import Viewers from "../Viewers/Viewers";
 import Recommend from "../Recommend/Recommend";
 import NewDisney from "../NewDisney/NewDisney";
+import Originals from "../Origninals/Originals";
 
 function Home() {
   return (
@@ -12,6 +13,7 @@ function Home() {
       <Viewers />
       <Recommend />
       <NewDisney />
+      <Originals />
     </Container>
   );
 }

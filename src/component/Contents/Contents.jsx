@@ -27,7 +27,7 @@ const Wrap = styled.div`
   transition: all 0.3s ease 0s;
 
   &:hover {
-    border: solid rgba(249, 249, 249, 0.8);
+    border: 3px solid rgba(249, 249, 249, 0.8);
     // transform: scale(1.05);
   }
 
