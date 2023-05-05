@@ -5,6 +5,7 @@ import Viewers from "../Viewers/Viewers";
 import Recommend from "../Recommend/Recommend";
 import NewDisney from "../NewDisney/NewDisney";
 import Originals from "../Origninals/Originals";
+import Trending from "../Trending/Trending";
 
 function Home() {
   return (
@@ -14,6 +15,7 @@ function Home() {
       <Recommend />
       <NewDisney />
       <Originals />
+      <Trending />
     </Container>
   );
 }
