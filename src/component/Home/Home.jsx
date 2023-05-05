@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ImageSlider from "../ImageSlider/ImageSlider";
 import Viewers from "../Viewers/Viewers";
 import Recommend from "../Recommend/Recommend";
+import NewDisney from "../NewDisney/NewDisney";
 
 function Home() {
   return (
@@ -10,6 +11,7 @@ function Home() {
       <ImageSlider />
       <Viewers />
       <Recommend />
+      <NewDisney />
     </Container>
   );
 }
