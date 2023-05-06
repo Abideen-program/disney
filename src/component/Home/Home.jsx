@@ -56,9 +56,8 @@ const Home = () => {
     );
   };
 
-  useEffect(() => {
-    getDocumentsAndCollections();
-  }, [userData]);
+  getDocumentsAndCollections();
+
   return (
     <Container>
       <ImageSlider />

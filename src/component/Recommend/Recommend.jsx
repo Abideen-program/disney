@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 const Recommend = () => {
   const movies = useSelector((state) => state.movies.recommend);
-  console.log(movies);
   return (
     <Container>
       <Text>Recommended for You</Text>
