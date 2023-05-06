@@ -16,8 +16,10 @@ const Home = () => {
   const userData = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
-  let recommends = [];
+  let recommend = [];
   let newDisney = [];
+  let original = [];
+  let trending = [];
 
   const getDocumentsAndCollections = async () => {
     const collectionRef = collection(firestore, "movies");
@@ -28,8 +30,8 @@ const Home = () => {
     querySnapshot.docs.map((docSnapshot) => {
       switch (docSnapshot.data().type) {
         case "recommend":
-          recommends = [
-            ...recommends,
+          recommend = [
+            ...recommend,
             { id: docSnapshot.id, ...docSnapshot.data() },
           ];
           break;
@@ -41,16 +43,29 @@ const Home = () => {
           ];
           break;
 
+        case "original":
+          original = [
+            ...original,
+            { id: docSnapshot.id, ...docSnapshot.data() },
+          ];
+          break;
+
+        case "trending":
+          trending = [
+            ...trending,
+            { id: docSnapshot.id, ...docSnapshot.data() },
+          ];
         default:
+          return "";
           break;
       }
     });
 
     dispatch(
       setMovies({
-        recommend: recommends,
+        recommend,
         newDisney,
-        original: null,
+        original,
         trending: null,
       })
     );
