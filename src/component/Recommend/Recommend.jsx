@@ -11,7 +11,13 @@ const Recommend = () => {
       <Content>
         {movies &&
           movies.map((movie) => {
-            return <Contents key={movie.id} image={movie.cardImg} />;
+            return (
+              <Contents
+                key={movie.id}
+                image={movie.cardImg}
+                link={"/detail/" + movie.id}
+              />
+            );
           })}
       </Content>
     </Container>

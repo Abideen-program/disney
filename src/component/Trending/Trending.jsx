@@ -12,7 +12,9 @@ const Trending = () => {
       <Content>
         {movies &&
           movies.map((movie) => {
-            return <Contents image={movie.cardImg} />;
+            return (
+              <Contents image={movie.cardImg} link={"/detail/" + movie.id} />
+            );
           })}
       </Content>
     </Container>
