@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMovies } from "../Store/Features/movieSlice";
 
 const Home = () => {
-  const userData = useSelector((state) => state.user.user);
+  // const userData = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
   let recommend = [];
@@ -66,7 +66,7 @@ const Home = () => {
         recommend,
         newDisney,
         original,
-        trending: null,
+        trending,
       })
     );
   };

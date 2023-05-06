@@ -11,7 +11,7 @@ const Originals = () => {
       <Content>
         {movies &&
           movies.map((movie) => {
-            return <Contents image={movie.cardImg} />;
+            return <Contents key={movie.id} image={movie.cardImg} />;
           })}
       </Content>
     </Container>
