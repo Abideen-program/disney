@@ -16,6 +16,7 @@ const Recommend = () => {
                 key={movie.id}
                 image={movie.cardImg}
                 link={"/detail/" + movie.id}
+                alt={movie.title}
               />
             );
           })}

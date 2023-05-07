@@ -13,7 +13,12 @@ const Trending = () => {
         {movies &&
           movies.map((movie) => {
             return (
-              <Contents image={movie.cardImg} link={"/detail/" + movie.id} />
+              <Contents
+                key={movie.id}
+                image={movie.cardImg}
+                link={"/detail/" + movie.id}
+                alt={movie.title}
+              />
             );
           })}
       </Content>

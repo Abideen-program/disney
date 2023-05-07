@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Contents = ({ image, video, link }) => {
+const Contents = ({ image, video, link, alt }) => {
   return (
     <Wrap>
       <Link to={link}>
-        <img src={image} alt="" />
+        <img src={image} alt={alt} />
         {video && (
           <video autoPlay={true} muted={true} loop={true} playsInline={true}>
             <source src={video} type="video/mp4" />
