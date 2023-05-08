@@ -47,6 +47,8 @@ const ImageSlider = () => {
 const Carousel = styled(Slider)`
   margin-top: 20px;
   overflow: hidden;
+  padding-bottom: 20px;
+  position: relative;
 
   & > button {
     height: 100%;
@@ -62,6 +64,9 @@ const Carousel = styled(Slider)`
   }
 
   ul li button {
+    position: absolute;
+    top: -25px;
+
     &:before {
       font-size: 10px;
       color: rgb(150, 158, 171);
