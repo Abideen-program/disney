@@ -23,11 +23,17 @@ const Details = () => {
   return (
     <Container>
       <Background>
-        <img src={selectedMovies && selectedMovies[0].backgroundImg} alt="" />
+        <img
+          src={selectedMovies && selectedMovies[0].backgroundImg}
+          alt={selectedMovies && selectedMovies[0].title}
+        />
       </Background>
 
       <ImageTitle>
-        <img src={selectedMovies && selectedMovies[0].titleImg} alt="" />
+        <img
+          src={selectedMovies && selectedMovies[0].titleImg}
+          alt={selectedMovies && selectedMovies[0].title}
+        />
       </ImageTitle>
 
       <ContentMeta>
@@ -90,7 +96,7 @@ const Background = styled.div`
 `;
 
 const ImageTitle = styled.div`
-  // margin: 0px auto;
+  margin-top: 15px;
   height: 35vh;
   width: 100%;
   min-height: 170px;
@@ -115,6 +121,11 @@ const Controls = styled.div`
   display: flex;
   align-items: center;
   flex-flow: row nowrap;
+
+  @media (max-width: 320px) {
+    flex-flow: row wrap;
+    justify-content: center;
+  }
 `;
 
 const Player = styled.button`
@@ -151,6 +162,10 @@ const Player = styled.button`
     img {
       width: 25px;
     }
+  }
+
+  @media (max-width: 320px) {
+   margin-bottom: 10px;
   }
 `;
 
