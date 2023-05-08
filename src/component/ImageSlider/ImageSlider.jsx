@@ -46,6 +46,7 @@ const ImageSlider = () => {
 
 const Carousel = styled(Slider)`
   margin-top: 20px;
+  overflow: hidden;
 
   & > button {
     height: 100%;
