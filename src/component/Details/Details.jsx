@@ -1,24 +1,33 @@
 import React from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Details = () => {
   const { id } = useParams();
 
+  const recommend = useSelector((state) => state.movies.recommend);
+  const newDisney = useSelector((state) => state.movies.newDisney);
+  const original = useSelector((state) => state.movies.original);
+  const trending = useSelector((state) => state.movies.trending);
+
+  //if all the categories of movies are truthy, do this.
+  const allMovies = recommend &&
+    newDisney &&
+    original &&
+    trending && [...recommend, ...newDisney, ...original, ...trending];
+
+  const selectedMovies =
+    allMovies && allMovies.filter((movie) => movie.id === id);
+
   return (
     <Container>
       <Background>
-        <img
-          src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/49B92C046117E89BC9243A68EE277A3B30D551D4599F23C10BF0B8C1E90AEFB6/scale?width=1440&aspectRatio=1.78&format=jpeg"
-          alt=""
-        />
+        <img src={selectedMovies && selectedMovies[0].backgroundImg} alt="" />
       </Background>
 
       <ImageTitle>
-        <img
-          src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/5C647DF3FFBFA343CFEA84AC715148F25F9E86F398B408010CC403E7654FB908/scale?width=1440&aspectRatio=1.78"
-          alt=""
-        />
+        <img src={selectedMovies && selectedMovies[0].titleImg} alt="" />
       </ImageTitle>
 
       <ContentMeta>
@@ -44,8 +53,10 @@ const Details = () => {
             </div>
           </GroupWatch>
         </Controls>
-        <SubTitle>Subtitle</SubTitle>
-        <Description>Description</Description>
+        <SubTitle>{selectedMovies && selectedMovies[0].subTitle}</SubTitle>
+        <Description>
+          {selectedMovies && selectedMovies[0].description}
+        </Description>
       </ContentMeta>
     </Container>
   );

@@ -63,9 +63,11 @@ const Header = () => {
   return (
     <>
       <Nav>
-        <Logo>
-          <img src="/images/logo.svg" alt="Logo" />
-        </Logo>
+        <Link to={"/home"}>
+          <Logo>
+            <img src="/images/logo.svg" alt="Logo" />
+          </Logo>
+        </Link>
 
         {userData ? (
           <NAvMenu>
